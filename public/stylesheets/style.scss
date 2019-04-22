@@ -1,12 +1,20 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background: black;
+  background: black
 }
 
 .container {
-  background: gray;
+  background-image: url("/images/mapTreasure2.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: screen;
+  height: 80vh;
+  width: 100vw;
   margin-top: 5%;
   text-align: center;
+}
+h3{
+  color: whitesmoke;
 }
 
 h1{
@@ -34,4 +42,8 @@ box-shadow: 0px 0px 20px 10px rgba(194, 188, 188, 0.75);
 nav {
   text-align: center;
   margin-top: 2%;
+}
+
+.loginFb {
+  margin-top: 25%;
 }

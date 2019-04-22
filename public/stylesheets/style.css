@@ -3,9 +3,17 @@ body {
   background: black; }
 
 .container {
-  background: gray;
+  background-image: url("/images/mapTreasure2.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: screen;
+  height: 80vh;
+  width: 100vw;
   margin-top: 5%;
   text-align: center; }
+
+h3 {
+  color: whitesmoke; }
 
 h1 {
   color: blue;
@@ -28,5 +36,8 @@ img {
 nav {
   text-align: center;
   margin-top: 2%; }
+
+.loginFb {
+  margin-top: 25%; }
 
 /*# sourceMappingURL=style.css.map */
