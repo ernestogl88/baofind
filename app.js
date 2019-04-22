@@ -15,7 +15,7 @@ const flash      = require("connect-flash");
     
 
 mongoose
-  .connect('mongodb://localhost/week6', {useNewUrlParser: true})
+  .connect('mongodb://localhost/baofind', {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -77,6 +77,12 @@ require('./passport')(app);
 
 const index = require('./routes/index');
 app.use('/', index);
+
+// const game = require('./routes/game');
+// app.use('/game', game);
+
+// const profile = require('./routes/profile');
+// app.use('/profile', profile);
 
 const authRoutes = require('./routes/auth');
 app.use('/auth', authRoutes);
