@@ -11,21 +11,13 @@ passport.use(
       clientSecret: process.env.FACEBOOK_APP_SECRET,
       callbackURL: "http://localhost:3000/auth/facebook/callback"
     },
-    (accessToken, refreshToken, profile, cb, done) => {
+    (accessToken, refreshToken, profile, done) => {
       User.findOne({
         facebookId: profile.id
       })
         .then(user => {
           if (user) {
-            User.findByIdAndUpdate(
-              user._id,
-              {
-                username: profile.displayName
-              },
-              { new: true }
-            ).then(user => {
-              return done(null, user);
-            });
+            return done(null, user);
           }
 
           const newUser = new User({
