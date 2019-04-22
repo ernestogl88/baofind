@@ -3,6 +3,7 @@ const Schema   = mongoose.Schema;
 
 const userSchema = new Schema({
   facebookId: String,
+  username: String,
   gameId: String,
   pictures: [],
   currentGame: { type: Schema.Types.ObjectId, ref: "Game"},

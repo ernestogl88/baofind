@@ -11,12 +11,9 @@ const bcryptSalt = 10;
 router.get('/facebook',
   passport.authenticate('facebook'));
 
-router.get('/facebook/callback',
-  passport.authenticate('facebook', { failureRedirect: '/signup' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  });
+  router.get('/facebook/callback',
+  passport.authenticate('facebook', { successRedirect: '/',
+                                      failureRedirect: '/login' }));
 
  router.get("/login", (req, res, next) => {
    res.render("auth/login", { "message": req.flash("error") });
