@@ -81,8 +81,8 @@ app.use('/', index);
 // const game = require('./routes/game');
 // app.use('/game', game);
 
-// const profile = require('./routes/profile');
-// app.use('/profile', profile);
+ const profile = require('./routes/profile');
+ app.use('/profile', profile);
 
 const authRoutes = require('./routes/auth');
 app.use('/auth', authRoutes);
