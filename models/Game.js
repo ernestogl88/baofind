@@ -2,11 +2,14 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const gameSchema = new Schema({
-  mapId: { type: Schema.Types.ObjectId, ref: "Maps"},
-  userId: { type: Schema.Types.ObjectId, ref: "User" },
-  status: { type: Boolean, default: false },
-  start: Date,
-  finish: Date
+  gameId: String,
+  name: String,
+  map: { type: Schema.Types.ObjectId, ref: "Map"},
+  users: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  state: { type: Boolean, default: false },
+  startDate: Date,
+  finishDate: Date,
+  reward: String
 });
 
 const Game = mongoose.model("Game", gameSchema);
