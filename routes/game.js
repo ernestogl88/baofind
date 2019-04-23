@@ -11,7 +11,7 @@ router.post('/newGame', (req,res)=>{
 })
 
 router.get('/joinGame', (req,res)=>{
-  
+  res.render('game/joinGame')
 })
 
 
