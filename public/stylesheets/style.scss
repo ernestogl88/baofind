@@ -21,7 +21,7 @@ $color-white: whitesmoke;
   margin-top: 5%;
   padding-top: 10%;
   text-align: center;
-  filter: bright(0.5)
+  filter: bright(0.3)
 }
 
 h1{
@@ -49,6 +49,9 @@ p{
 }
 a {
   color: $color-purpure;
+}
+small {
+  color: $color-white;
 }
 
 .buttonLogin{
@@ -109,4 +112,54 @@ nav {
 
 .joinGame {
   margin-top: 15%;
+}
+
+// clue
+.info-card {
+  margin: 0 auto;
+}
+
+.info-card:hover .back {
+  border-radius: 50%;
+  border: 1px solid transparent;
+  transform: rotateY(0);
+}
+
+.info-card:hover .front {
+  transform: rotateY(180deg);
+}
+.front, .back {
+  background:transparent;
+	transition: transform 1s;
+	transform-style: preserve-3d;
+	backface-visibility: hidden;
+}
+.front {
+  filter: invert(0.8);
+	overflow: hidden;
+	width: 250px;
+	height: 300px;
+	position: absolute;
+	z-index: 1;
+}
+
+.back {
+  filter: sepia(0.8);
+  opacity: 0.8;
+	padding-top: 0px;
+	width: 250px;
+	height: 300px;
+	transform: rotateY(-180deg);
+	overflow: scroll;
+}
+
+.uploadPhoto {
+  color: $color-blue;
+  margin: 0 auto;
+}
+.uploadPhoto input {
+  color: $color-orange;
+  width: 60%;
+  border: 2px solid transparent;
+  border-radius: 5%;
 }

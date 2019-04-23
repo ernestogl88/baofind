@@ -2,8 +2,13 @@ require('dotenv').config();
 
 const express = require('express');
 const router  = express.Router();
+<<<<<<< HEAD
 const Game = require('../models/Game')
 const request = require('request-promise');
+=======
+const Game = require('../models/Game');
+const multer  = require('multer');
+>>>>>>> views
 
 router.get('/newGame', (req,res)=>{
   res.render('game/newGame')
@@ -26,6 +31,12 @@ router.get('/nearPlaces/:lat/:long', (req,res)=>{
       console.log(err);
   });
 })
+
+
+router.get('/clue', (req,res) => {
+  res.render('game/clue')
+})
+
 
 
 module.exports = router;
