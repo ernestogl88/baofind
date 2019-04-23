@@ -8,7 +8,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: screen;
-  height: 80vh;
+  height: 87vh;
   width: 100vw;
   margin-top: 5%;
   text-align: center;
@@ -46,4 +46,19 @@ nav {
 
 .loginFb {
   margin-top: 25%;
+}
+
+.buttonChoice {
+  width: 100%;
+  margin: 8% auto;
+  
+}
+.buttonChoice h4 {
+  
+  border: 2px solid white;
+  border-radius: 10px;
+}
+
+.buttonChoice p {
+  font-size: 0.8rem;
 }
