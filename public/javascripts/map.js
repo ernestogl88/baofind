@@ -20,21 +20,22 @@ function placeMarker(position, map) {
   let lat = marker.position.lat();
   let long = marker.position.lng();
   let photoRef;
-  createMarkerInfo(lat, long);
   axios
     .get(`http://localhost:3000/game/nearPlaces/${lat}/${long}`)
     .then(nearestPoint => {
+      createMarkerInfo(lat, long);
       photoRef = nearestPoint.data.results[1].photos[0].photo_reference;
       let img = document.createElement("img");
       img.setAttribute(
         "src",
         `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoRef}&sensor=false&maxheight=1600&maxwidth=1600&key=AIzaSyCekv9TIkClXh5EfD8V7pObO2gTrs_g__A`
       );
-      img.setAttribute('width','250px')
+      img.setAttribute('width','200vw')
       let container = document.getElementById("markersInfo");
       container.appendChild(img);
-      let input = document.createElement('input');
-      input.setAttribute('type','text');
+      let input = document.createElement('textarea');
+      input.setAttribute('rows','5');
+      input.setAttribute('columns','30');
       container.appendChild(input);
     })
     .catch(err => {
