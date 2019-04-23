@@ -3,6 +3,14 @@ body {
   background: black
 }
 
+
+$color-yellow: #FFF587;
+$color-orange: #FF8C64;
+$color-blue: #A3A1A8;
+$color-red: #FF665A;
+$color-purpure: #7D6B7D;
+$color-white: whitesmoke;
+
 .container {
   background-image: url("/images/mapTreasure2.jpg");
   background-repeat: no-repeat;
@@ -11,19 +19,36 @@ body {
   height: 87vh;
   width: 100vw;
   margin-top: 5%;
+  padding-top: 10%;
   text-align: center;
-}
-h3{
-  color: whitesmoke;
+  filter: bright(0.5)
 }
 
 h1{
-  color: blue;
+  color: $color-yellow;
   font-weight: bold;
 }
 
+h3{
+  color: $color-red;
+}
+
+h4 {
+  color: $color-blue;
+
+}
+
+h5 {
+  color: $color-white;
+}
+h6 {
+  color: $color-orange;
+}
+p{
+  color: $color-yellow;
+}
 a {
-  color: #00B7FF;
+  color: $color-purpure;
 }
 
 .buttonLogin{
@@ -37,6 +62,9 @@ a {
   -moz-box-shadow: inset 0px 0px 40px 10px rgba(179, 165, 165, 0.75);
   box-shadow: inset 0px 0px 40px 20px rgba(19, 119, 185, 0.75);
   border-radius: 10px;
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 5%;
 }
 
 nav {
@@ -45,14 +73,13 @@ nav {
 }
 
 .loginFb {
-  margin-top: 25%;
+  margin-top: 80%;
 }
 
 .buttonChoice {
   width: 100%;
-  margin: 8% auto;
-  
-}
+  margin: 5% auto;
+  }
 .buttonChoice h4 {
   
   border: 2px solid white;
@@ -61,4 +88,25 @@ nav {
 
 .buttonChoice p {
   font-size: 0.8rem;
+}
+.imgProfile {
+  opacity: 0.8;
+}
+.imgPlay {
+  width: 40%;
+}
+
+.buttonChoiceGame {
+  opacity: 1;
+}
+.card-header {
+  color: whitesmoke;
+}
+
+.profileCard {
+  background: transparent
+}
+
+.joinGame {
+  margin-top: 15%;
 }

@@ -10,17 +10,31 @@ body {
   height: 87vh;
   width: 100vw;
   margin-top: 5%;
-  text-align: center; }
-
-h3 {
-  color: whitesmoke; }
+  padding-top: 10%;
+  text-align: center;
+  filter: bright(0.5); }
 
 h1 {
-  color: blue;
+  color: #FFF587;
   font-weight: bold; }
 
+h3 {
+  color: #FF665A; }
+
+h4 {
+  color: #A3A1A8; }
+
+h5 {
+  color: whitesmoke; }
+
+h6 {
+  color: #FF8C64; }
+
+p {
+  color: #FFF587; }
+
 a {
-  color: #00B7FF; }
+  color: #7D6B7D; }
 
 .buttonLogin {
   margin-top: 5%;
@@ -31,18 +45,21 @@ a {
   -webkit-box-shadow: inset 0px 0px 40px 10px rgba(199, 175, 175, 0.75);
   -moz-box-shadow: inset 0px 0px 40px 10px rgba(179, 165, 165, 0.75);
   box-shadow: inset 0px 0px 40px 20px rgba(19, 119, 185, 0.75);
-  border-radius: 10px; }
+  border-radius: 10px;
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 5%; }
 
 nav {
   text-align: center;
   margin-top: 2%; }
 
 .loginFb {
-  margin-top: 25%; }
+  margin-top: 80%; }
 
 .buttonChoice {
   width: 100%;
-  margin: 8% auto; }
+  margin: 5% auto; }
 
 .buttonChoice h4 {
   border: 2px solid white;
@@ -50,5 +67,23 @@ nav {
 
 .buttonChoice p {
   font-size: 0.8rem; }
+
+.imgProfile {
+  opacity: 0.8; }
+
+.imgPlay {
+  width: 40%; }
+
+.buttonChoiceGame {
+  opacity: 1; }
+
+.card-header {
+  color: whitesmoke; }
+
+.profileCard {
+  background: transparent; }
+
+.joinGame {
+  margin-top: 15%; }
 
 /*# sourceMappingURL=style.css.map */
