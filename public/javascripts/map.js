@@ -1,25 +1,24 @@
 const myCurrentCoords = {
-  lat: 40.4138167,
-  lng: -3.7025938
+  lat: 40.4136667,
+  lng: -3.7045938
 };
 
-const Map = new google.maps.Map(
+const map = new google.maps.Map(
   document.getElementById('map'),
   {
-    zoom: 15,
+    zoom: 15.5,
     center: myCurrentCoords
   }
 );
 
-
-
-google.maps.event.addListener(map, 'click', function (marker) {
-  new google.maps.Marker({
-    position: {
-      lat: lat,
-      lng: lng
-    },
-    map: Map,
-    title: title
-  });
+map.addListener('click', function(e) {
+  placeMarker(e.latLng, map);
 });
+
+function placeMarker(position, map) {
+  var marker = new google.maps.Marker({
+      position: position,
+      map: map
+  });
+
+}
