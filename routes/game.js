@@ -14,5 +14,13 @@ router.get('/joinGame', (req,res)=>{
   res.render('game/joinGame')
 })
 
+router.get('/nearPlaces', (req,res)=>{
+
+})
+
+router.get('/getPhoto', (req,res)=>{
+  
+})
+
 
 module.exports = router;
