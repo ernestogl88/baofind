@@ -2,13 +2,8 @@ require('dotenv').config();
 
 const express = require('express');
 const router  = express.Router();
-<<<<<<< HEAD
 const Game = require('../models/Game')
 const request = require('request-promise');
-=======
-const Game = require('../models/Game');
-const multer  = require('multer');
->>>>>>> views
 
 router.get('/newGame', (req,res)=>{
   res.render('game/newGame')
