@@ -78,8 +78,8 @@ require('./passport')(app);
 const index = require('./routes/index');
 app.use('/', index);
 
-// const game = require('./routes/game');
-// app.use('/game', game);
+const game = require('./routes/game');
+app.use('/game', game);
 
  const profile = require('./routes/profile');
  app.use('/profile', profile);

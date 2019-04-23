@@ -13,4 +13,13 @@ router.get('/', (req, res) => {
 
 });
 
+router.get('/myPictures', (req,res)=>{
+  User.findById(req.user.id).then(user => {
+    res.render('myPictures', {user})
+  })
+  .catch(err => {
+    res.status(500).send ({message: `Error to find the user ${err}`})
+  })
+})
+
 module.exports = router;
