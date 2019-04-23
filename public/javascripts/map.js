@@ -22,21 +22,24 @@ function placeMarker(position, map) {
   let photoRef;
   createMarkerInfo(lat, long);
   axios
-    .get(
-      `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${long}&radius=50&key=AIzaSyCekv9TIkClXh5EfD8V7pObO2gTrs_g__A`
-    )
+    .get(`http://localhost:3000/game/nearPlaces/${lat}/${long}`)
     .then(nearestPoint => {
       photoRef = nearestPoint.data.results[1].photos[0].photo_reference;
-      return axios.get(
-        `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoRef}=false&maxheight=500&maxwidth=500&key=AIzaSyCekv9TIkClXh5EfD8V7pObO2gTrs_g__A`
+      let img = document.createElement("img");
+      img.setAttribute(
+        "src",
+        `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoRef}&sensor=false&maxheight=1600&maxwidth=1600&key=AIzaSyCekv9TIkClXh5EfD8V7pObO2gTrs_g__A`
       );
+      img.setAttribute('width','250px')
+      let container = document.getElementById("markersInfo");
+      container.appendChild(img);
+      let input = document.createElement('input');
+      input.setAttribute('type','text');
+      container.appendChild(input);
     })
-    .then()
-    .catch(err=>{
-      console.log(err)
-    })
-
-  console.log(photoRef);
+    .catch(err => {
+      console.log(err);
+    });
 }
 
 function createMarkerInfo(lat, lng) {
