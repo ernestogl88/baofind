@@ -191,23 +191,72 @@ nav {
 #markersInfo {
   margin-top: 5%;
   display: flex;
-  flex-wrap: wrap;
-  flex-basis: 23%;
-  justify-content: center;
+  display: -webkit-flex;
+  flex-basis: 70% 30%;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
+  align-content: center;
   border: 2px solid black;
   border-radius: 10px;
+  color: $color-white
+}
 
+#markersInfoLabels{
+  margin: 5px;
 }
-#markersInfo img{
-  width: 50vw;
-  height: 20vh;
+
+#markersInfoInputs{
+  text-align: center;
+  background:$color-blue;
+  opacity: 0.8;
+  margin: 3px;
+  border: 2px solid $color-purpure;
+  border-radius: 10px;
 }
-#markersInfo textarea{
-  width: 20vh;
-  height: 20vh;
+
+#markersInfo input{
+  width: 95%;
+  border: 2px solid $color-blue;
+  border-radius: 10px;
+
 }
 
 .createGameButton {
   margin-top: 5%;
+  background-color: $color-blue;
+  color: $color-white;
+  border: 2px solid $color-yellow;
+  padding: 3%;
+  font-weight: bold;
+  border-radius: 10%;
 }
+.createGameButton:hover {
+  background-color: $color-orange;
+  color: $color-purpure;
+  font-weight: bold;
+}
+
+#newGameForm img{
+  margin: 10%;
+  width: 40%;
+  height: 20%;
+}
+
+#newGameForm textarea{
+  width: 40%;
+  height: 20%;
+}
+.imageInfo{
+  background-color: $color-blue;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  flex-basis: 33%;
+}
+.imageInfo img {
+  width: 100%;
+}
+
+

@@ -27,7 +27,7 @@ function placeMarker(position, map) {
         photoRef = nearestPoint.data.results[2].photos[0].photo_reference;
       }
       photoRef = nearestPoint.data.results[1].photos[0].photo_reference;
-      let container = document.getElementById("newGameForm");
+      let container = document.getElementById("imageInfo");
       let div = document.createElement('div');
       let latInput = document.createElement('input');
       latInput.setAttribute('type','text');
@@ -56,8 +56,8 @@ function placeMarker(position, map) {
       let div2 = document.createElement('div');
       div2.appendChild(img);
       let input = document.createElement('textarea');
-      input.setAttribute('rows','5');
-      input.setAttribute('columns','30');
+      input.setAttribute('rows','3');
+      input.setAttribute('columns','20');
       div2.appendChild(input);
       container.appendChild(div2)
       setFormIds();
