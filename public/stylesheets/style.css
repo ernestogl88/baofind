@@ -133,4 +133,44 @@ nav {
   border: 2px solid transparent;
   border-radius: 5%; }
 
+.containerNewGame {
+  background-image: url("/images/mapTreasure2.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: screen;
+  height: 87vh;
+  width: 100vw;
+  margin-top: 5%;
+  padding-top: 2%;
+  text-align: center;
+  filter: bright(0.3); }
+
+#map {
+  width: 92vw;
+  height: 40vh;
+  margin: 0 auto;
+  border: 2px solid black;
+  border-radius: 10px; }
+
+#markersInfo {
+  margin-top: 5%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-basis: 23%;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid black;
+  border-radius: 10px; }
+
+#markersInfo img {
+  width: 50vw;
+  height: 20vh; }
+
+#markersInfo textarea {
+  width: 20vh;
+  height: 20vh; }
+
+.createGameButton {
+  margin-top: 5%; }
+
 /*# sourceMappingURL=style.css.map */

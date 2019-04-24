@@ -4,8 +4,7 @@ const Schema   = mongoose.Schema;
 const userSchema = new Schema({
   facebookId: String,
   username: String,
-  gameId: String,
-  pictures: [],
+  pictures: [{type: String}],
   currentGame: { type: Schema.Types.ObjectId, ref: "Game"},
   currentSpot: { type: Schema.Types.ObjectId, ref: "Spot"},
 });

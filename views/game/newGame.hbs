@@ -1,10 +1,28 @@
-<div id="map" style="width:100vw; height:65vh; margin-top: 2vh"></div>
+<div class="container containerNewGame">
+  <div class="row">
+    <div class="col-sm">
+      <div class="form-group">
+        <input type="text" class="form-control" name="" id="" aria-describedby="helpId"
+          placeholder="Introduce the game name">
+      </div>
+      <div id="map"></div>
+    </div>
+    <div class="col-sm createGameButton">
+      <form action="post">
+        <button type="submit">Create Game</button>
+      </form>
 
-<div id="markersInfo">
-  <form action="post">
-    <button type="submit">Create Game</button>
-  </form>
+    </div>
+    <div class="col-sm">
+
+      <div id="markersInfo">
+      </div>
+
+    </div>
+  </div>
 </div>
+
+
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCekv9TIkClXh5EfD8V7pObO2gTrs_g__A"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>

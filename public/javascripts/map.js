@@ -30,12 +30,12 @@ function placeMarker(position, map) {
         "src",
         `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoRef}&sensor=false&maxheight=1600&maxwidth=1600&key=AIzaSyCekv9TIkClXh5EfD8V7pObO2gTrs_g__A`
       );
-      img.setAttribute('width','200vw')
+      //img.setAttribute('width','200vw')
       let container = document.getElementById("markersInfo");
       container.appendChild(img);
       let input = document.createElement('textarea');
-      input.setAttribute('rows','5');
-      input.setAttribute('columns','30');
+      input.setAttribute('rows','2');
+      input.setAttribute('columns','10');
       container.appendChild(input);
     })
     .catch(err => {

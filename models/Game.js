@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const gameSchema = new Schema({
-  gameId: String,
   name: String,
   map: { type: Schema.Types.ObjectId, ref: "Map"},
   users: [{ type: Schema.Types.ObjectId, ref: "User" }],
