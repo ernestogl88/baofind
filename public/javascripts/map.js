@@ -28,7 +28,7 @@ function placeMarker(position, map) {
       let img = document.createElement("img");
       img.setAttribute(
         "src",
-        `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoRef}&sensor=false&maxheight=1600&maxwidth=1600&key=AIzaSyCekv9TIkClXh5EfD8V7pObO2gTrs_g__A`
+        `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoRef}&sensor=false&maxheight=300&maxwidth=300&key=AIzaSyCekv9TIkClXh5EfD8V7pObO2gTrs_g__A`
       );
       img.setAttribute('width','200vw')
       let container = document.getElementById("markersInfo");
