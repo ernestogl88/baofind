@@ -4,6 +4,8 @@ const express = require('express');
 const router  = express.Router();
 const Game = require('../models/Game')
 const request = require('request-promise');
+const uploadCloud = require('../config/cloudinary.js');
+const Spot = require('../models/Spots')
 
 router.get('/newGame', (req,res)=>{
   res.render('game/newGame')
@@ -32,6 +34,19 @@ router.get('/clue', (req,res) => {
   res.render('game/clue')
 })
 
+router.post('/clue', uploadCloud.single('photo'), (req, res) => {
+  const { picture } = req.body;
+  const imgPath = req.file.url;
+  const imgName = req.file.originalname;
+  const photo = new Spot({picture, description, imgPath, imgName})
+  photo.save()
+  .then(spot => {
+    res.render('game/clue');
+  })
+  .catch(error => {
+    console.log(error);
+  })
+});
 
 
 module.exports = router;
