@@ -1,34 +1,38 @@
 <div class="container containerNewGame">
   <div class="row">
     <div class="col-sm">
-      <div class="form-group">
-        <input type="text" class="form-control" name="" id="" aria-describedby="helpId"
-          placeholder="Introduce the game name">
-      </div>
+      
       <div id="map"></div>
     </div>
-    <div class="col-sm createGameButton">
-
-
-<div id="markersInfo">
-  <form action="/game/newGame" method="POST" id="newGameForm">
-  <label for="gameTitle">Enter title for your Game:</label>
-    <input type="text" name="gameTitle">
-    <label for="gameDescription">Enter a description for your Game:</label>
-    <input type="text" name="gameDescription">
-    <label for="gameReward">The reward:</label>
-    <input type="text" name="gameReward">
-    <label for="startDate">Start Date and Time</label>
-    <input type="date" name="startDate">
-    <label for="endDate">Finish Date and Time</label>
-    <input type="date" name="endDate">
-    <input type="hidden" name="totalSpots" value='' id="totalSpots">
-    <button type="submit">Create Game</button>
-  </form>
-</div>
 
 
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCekv9TIkClXh5EfD8V7pObO2gTrs_g__A"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
-<script type="text/javascript" src="../javascripts/map.js"></script>
+    <form action="/game/newGame" method="POST" id="newGameForm">
+      <div id="markersInfo">
+        <div class="labels" id="markersInfoLabels">
+          <label for="gameTitle" id="gameTitle">Enter title for your Game:</label>
+          <label for="gameDescription">Game Description:</label>
+          <label for="gameReward">The reward:</label>
+          <label for="startDate">Start Date and Time</label>
+          <label for="endDate">Finish Date and Time</label>
+        </div>
+        <div class="inputs" id="markersInfoInputs">
+          <input type="text" name="gameTitle">
+          <input type="text" name="gameDescription">
+          <input type="text" name="gameReward">
+          <input type="date" name="startDate">
+          <input type="date" name="endDate">
+          <input type="hidden" name="totalSpots" value='' id="totalSpots">
+        </div>
+      </div>
+        <button type="submit" class="createGameButton">Create Game</button>
+        <div class="imageInfo" id="imageInfo">
+          
+        </div>
+    </form>
+
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCekv9TIkClXh5EfD8V7pObO2gTrs_g__A"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script type="text/javascript" src="../javascripts/map.js"></script>
