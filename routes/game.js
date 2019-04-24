@@ -6,6 +6,7 @@ const Game = require('../models/Game')
 const request = require('request-promise');
 const uploadCloud = require('../config/cloudinary.js');
 const Spot = require('../models/Spots')
+const multer  = require('multer');
 
 router.get('/newGame', (req,res)=>{
   res.render('game/newGame')
