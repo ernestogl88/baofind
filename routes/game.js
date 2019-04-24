@@ -5,13 +5,32 @@ const router  = express.Router();
 const Game = require('../models/Game')
 const request = require('request-promise');
 const multer  = require('multer');
+const Map = require('../models/Map');
+const Spot  = require('../models/Spots');
+const User = request('../models/User.js');
 
 router.get('/newGame', (req,res)=>{
   res.render('game/newGame')
 })
 
 router.post('/newGame', (req,res)=>{
-  
+  let spots = []
+  for (var i=0; i<req.body.totalSpots;i++){
+    let lng = `lng${i}`;
+    let lat = `lat${i}`;
+    let picture = `image${i}`;
+    let spotDescription = `description${i}`;
+    let spot = new Spot({
+      coords: {
+        lng: req.body[lng],
+        lat: req.body[lat]
+      },
+      picture: req.body[picture],
+      spotDescription: req.body[spotDescription]
+    });
+    spots.push(spot);
+  }
+  console.log(spots);
 })
 
 router.get('/joinGame', (req,res)=>{

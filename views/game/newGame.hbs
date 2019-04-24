@@ -1,7 +1,16 @@
 <div id="map" style="width:100vw; height:65vh; margin-top: 2vh"></div>
 
 <div id="markersInfo">
-  <form action="post">
+  <form action="/game/newGame" method="POST" id="newGameForm">
+    <label for="gameDescription">Enter a description for your Game:</label>
+    <input type="text" name="gameDescription">
+    <label for="gameReward">The reward:</label>
+    <input type="text" name="gameReward">
+    <label for="startDate">Start Date and Time</label>
+    <input type="date" name="startDate">
+    <label for="endDate">Finish Date and Time</label>
+    <input type="date" name="endDate">
+    <input type="hidden" name="totalSpots" value='' id="totalSpots">
     <button type="submit">Create Game</button>
   </form>
 </div>
