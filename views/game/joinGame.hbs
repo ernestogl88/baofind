@@ -15,7 +15,13 @@
       </div>
     </div>
     <div class="col-sm">
-      <a href="/game/clue"><img src="/images/play.png" alt="" class="imgPlay"></a>
+      {{#each games}}
+        {{name}}
+        {{state}}
+        {{map.mapDescription}}
+        <a href="/game/joinGame/{{_id}}">Join the game</a>
+      {{/each}}
+      {{!-- <a href="/game/clue"><img src="/images/play.png" alt="" class="imgPlay"></a> --}}
     </div>
 
     <div class="col-sm">
