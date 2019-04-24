@@ -43,9 +43,9 @@ router.post("/newGame", (req, res) => {
   });
   Spot.insertMany(spots)
     .then(spots => {
-      spots.forEach(spot=>{
+      spots.forEach(spot => {
         spotsId.push(spot._id);
-      })
+      });
       map.spots = spotsId;
     })
     .then(() => {
@@ -62,9 +62,24 @@ router.post("/newGame", (req, res) => {
 
 router.get("/joinGame", (req, res) => {
   Game.find()
-  .then(games=>{
-    res.render("game/joinGame", games);
+    .populate("map")
+    .then(games => {
+      res.render("game/joinGame", { games });
+    });
+});
+
+router.get("/joinGame/:id", (req, res) => {
+  Game.findByIdAndUpdate(req.params.id, {
+    $push: { users: req.user._id }
   })
+  .populate('map')
+  .then(game => {
+    User.findByIdAndUpdate(req.user._id, { currentGame: req.params.id }).then(
+      user => {
+        res.redirect(`/game/clue/${game.map.spots[0]}`);
+      }
+    );
+  });
 });
 
 router.get("/nearPlaces/:lat/:long", (req, res) => {
@@ -79,8 +94,12 @@ router.get("/nearPlaces/:lat/:long", (req, res) => {
     });
 });
 
-router.get("/clue", (req, res) => {
-  res.render("game/clue");
+router.get("/clue/:id", (req, res) => {
+  console.log('dentro del detalle de clue')
+  Spot.findById(req.params.id)
+  .then(spot=>{
+    res.render("game/clue", {spot});
+  })
 });
 
 router.post("/clue", uploadCloud.single("photo"), (req, res) => {
