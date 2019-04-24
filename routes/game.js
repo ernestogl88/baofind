@@ -22,41 +22,42 @@ router.post("/newGame", (req, res) => {
     let lat = `lat${i}`;
     let picture = `image${i}`;
     let spotDescription = `description${i}`;
+    //console.log(req.body[lng], req.body[lat])
     let spot = new Spot({
-      coords: {
-        lng: req.body[lng],
-        lat: req.body[lat]
-      },
+      lng: req.body[lng],
+      lat: req.body[lat],
       picture: req.body[picture],
       spotDescription: req.body[spotDescription]
     });
     spots.push(spot);
   }
+  let map = new Map({
+    mapDescription: req.body.gameDescription
+  });
   let game = new Game({
     name: req.body.gameTitle,
     users: [req.user._id],
     startDate: req.body.startDate,
-    endDate: req.body.endDate,
+    finishDate: req.body.endDate,
     reward: req.body.gameReward
   });
-  spots.forEach(spot => {
-    spot
-      .save()
-      .then(spot => {
+  Spot.insertMany(spots)
+    .then(spots => {
+      spots.forEach(spot=>{
         spotsId.push(spot._id);
       })
-      .catch(err => console.log(err));
-  });
-  let map = new Map({
-    spots: spotsId,
-    mapDescription: req.body.gameDescription
-  });
-  map.save().then(map => {
-    game.map = map._id;
-    return game.save()
-    .then(res.render('/'))
-    .catch(err=>console.log(err))
-  });
+      map.spots = spotsId;
+    })
+    .then(() => {
+      map.save().then(map => {
+        game.map = map._id;
+        return game
+          .save()
+          .then(res.render("index"))
+          .catch(err => console.log(err));
+      });
+    })
+    .catch(err => console.log(err));
 });
 
 router.get("/joinGame", (req, res) => {
@@ -83,7 +84,8 @@ router.post("/clue", uploadCloud.single("photo"), (req, res) => {
   const { picture } = req.body;
   const imgPath = req.file.url;
   User.findByIdandUpdate(req.user.id, {
-    $push: { pictures: imgPath }})
+    $push: { pictures: imgPath }
+  })
     .then(spot => {
       res.render("game/clue");
     })

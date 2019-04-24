@@ -21,7 +21,7 @@ function placeMarker(position, map) {
   let long = marker.position.lng();
   let photoRef;
   axios
-    .get(`https://baofind.herokuapp.com/game/nearPlaces/${lat}/${long}`)
+    .get(`http://localhost:3000/game/nearPlaces/${lat}/${long}`)
     .then(nearestPoint => {
       if(nearestPoint.data.results[1].photos===undefined){
         photoRef = nearestPoint.data.results[2].photos[0].photo_reference;
@@ -32,13 +32,13 @@ function placeMarker(position, map) {
       let latInput = document.createElement('input');
       latInput.setAttribute('type','text');
       latInput.setAttribute('class','lat');
-      latInput.disabled=true;
+      latInput.readOnly=true;
       latInput.value= lat;
       div.appendChild(latInput);
       let lngInput = document.createElement('input');
       lngInput.setAttribute('type','text');
       lngInput.setAttribute('class','lng');
-      lngInput.disabled=true;
+      lngInput.readOnly=true;
       lngInput.value= long;
       div.appendChild(lngInput);
       container.appendChild(div);
