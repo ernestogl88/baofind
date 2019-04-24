@@ -32,13 +32,13 @@ function placeMarker(position, map) {
       let latInput = document.createElement('input');
       latInput.setAttribute('type','text');
       latInput.setAttribute('class','lat');
-      latInput.disabled=true;
+      latInput.readOnly=true;
       latInput.value= lat;
       div.appendChild(latInput);
       let lngInput = document.createElement('input');
       lngInput.setAttribute('type','text');
       lngInput.setAttribute('class','lng');
-      lngInput.disabled=true;
+      lngInput.readOnly=true;
       lngInput.value= long;
       div.appendChild(lngInput);
       container.appendChild(div);

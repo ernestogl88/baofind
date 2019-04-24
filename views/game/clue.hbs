@@ -21,10 +21,13 @@
       <h2>Upload your photo</h2>
       <form action="" method="post" enctype="multipart/form-data">
         <input type="file" name="photo" id="photoUpload">
-        <input type="submit" value="Send">
+        <button type="submit" value="Send" disabled id="sendButton">Send</button>
       </form>
 
     </div>
 
   </div>
+  <input type="hidden" value="{{spot._id}}" id="spotId">
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+ <script src="/javascripts/metadata.js"></script>

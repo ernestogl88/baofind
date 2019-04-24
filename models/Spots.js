@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const spotSchema = new Schema({
-  lng: {type: String, required:true},
-  lat: {type: String, required:true},
+  lng: {type: String},
+  lat: {type: String},
   picture: {type: String, required:true},
   spotDescription: String
 });

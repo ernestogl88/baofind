@@ -72,14 +72,14 @@ router.get("/joinGame/:id", (req, res) => {
   Game.findByIdAndUpdate(req.params.id, {
     $push: { users: req.user._id }
   })
-  .populate('map')
-  .then(game => {
-    User.findByIdAndUpdate(req.user._id, { currentGame: req.params.id }).then(
-      user => {
-        res.redirect(`/game/clue/${game.map.spots[0]}`);
-      }
-    );
-  });
+    .populate("map")
+    .then(game => {
+      User.findByIdAndUpdate(req.user._id, { currentGame: req.params.id }).then(
+        user => {
+          res.redirect(`/game/clue/${game.map.spots[0]}`);
+        }
+      );
+    });
 });
 
 router.get("/nearPlaces/:lat/:long", (req, res) => {
@@ -95,11 +95,10 @@ router.get("/nearPlaces/:lat/:long", (req, res) => {
 });
 
 router.get("/clue/:id", (req, res) => {
-  console.log('dentro del detalle de clue')
-  Spot.findById(req.params.id)
-  .then(spot=>{
-    res.render("game/clue", {spot});
-  })
+  console.log("dentro del detalle de clue");
+  Spot.findById(req.params.id).then(spot => {
+    res.render("game/clue", { spot });
+  });
 });
 
 router.post("/clue", uploadCloud.single("photo"), (req, res) => {
@@ -116,4 +115,28 @@ router.post("/clue", uploadCloud.single("photo"), (req, res) => {
     });
 });
 
+router.get("/clue/:_id/:lat/:lng", (req, res) => {
+  const latPhoto = +req.params.lat;
+  const lngPhoto = +req.params.lng;
+  Spot.findById(req.params._id).then(spot => {
+    let latDif = 0.000898315*10;
+    let lngDif = 0.001172673*10;
+    let lngSpot = +spot.lng;
+    let latSpot = +spot.lat;
+    console.log(latPhoto);
+    console.log(spot.lat);
+    console.log(lngPhoto);
+    console.log(spot.lng);
+    if (
+      latPhoto >= latSpot- latDif &&
+      latPhoto <= latSpot + latDif &&
+      lngPhoto >= lngSpot - lngDif &&
+      lngPhoto <= lngSpot + lngDif
+    ) {
+      res.json({ answer: true });
+    } else {
+      res.json({ answer: false });
+    }
+  });
+});
 module.exports = router;
