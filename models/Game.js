@@ -5,7 +5,7 @@ const gameSchema = new Schema({
   name: {type: String, required:true},
   map: { type: Schema.Types.ObjectId, ref: "Map", required:true},
   users: [{ type: Schema.Types.ObjectId, ref: "User" }],
-  state: { type: Boolean, default: false },
+  status: { type: Boolean, default: true },
   startDate: {type: Date, required:true},
   finishDate: {type: Date, required:true},
   reward: String

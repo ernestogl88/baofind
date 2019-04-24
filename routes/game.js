@@ -61,7 +61,10 @@ router.post("/newGame", (req, res) => {
 });
 
 router.get("/joinGame", (req, res) => {
-  res.render("game/joinGame");
+  Game.find()
+  .then(games=>{
+    res.render("game/joinGame", games);
+  })
 });
 
 router.get("/nearPlaces/:lat/:long", (req, res) => {
