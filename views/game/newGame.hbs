@@ -8,12 +8,12 @@
       <div id="map"></div>
     </div>
     <div class="col-sm createGameButton">
-      <form action="post">
-        <button type="submit">Create Game</button>
-      </form>
+
 
 <div id="markersInfo">
   <form action="/game/newGame" method="POST" id="newGameForm">
+  <label for="gameTitle">Enter title for your Game:</label>
+    <input type="text" name="gameTitle">
     <label for="gameDescription">Enter a description for your Game:</label>
     <input type="text" name="gameDescription">
     <label for="gameReward">The reward:</label>
