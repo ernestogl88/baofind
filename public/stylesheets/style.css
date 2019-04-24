@@ -210,6 +210,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   display: flex;
+  flex-direction: column;
   flex-basis: 33%; }
 
 .imageInfo img {

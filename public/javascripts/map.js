@@ -32,13 +32,13 @@ function placeMarker(position, map) {
       let latInput = document.createElement('input');
       latInput.setAttribute('type','text');
       latInput.setAttribute('class','lat');
-      latInput.readOnly=true;
+      latInput.disabled=true;
       latInput.value= lat;
       div.appendChild(latInput);
       let lngInput = document.createElement('input');
       lngInput.setAttribute('type','text');
       lngInput.setAttribute('class','lng');
-      lngInput.readOnly=true;
+      lngInput.disabled=true;
       lngInput.value= long;
       div.appendChild(lngInput);
       container.appendChild(div);
@@ -47,7 +47,6 @@ function placeMarker(position, map) {
         "src",
         `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoRef}&sensor=false&maxheight=300&maxwidth=300&key=AIzaSyCekv9TIkClXh5EfD8V7pObO2gTrs_g__A`
       );
-      img.setAttribute('width','200vw');
       let imgInput = document.createElement('input');
       imgInput.setAttribute('type','hidden');
       imgInput.setAttribute('class','image')
