@@ -8,7 +8,12 @@
       <img src="/images/map.png" class="img-fluid rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle" alt="">
     </div>
     <div class="col-sm buttonLogin">
-      <a href="/auth/login"><button type="button" name="" id="" class="btn btn-primary">LOGIN</button></a>
+      {{#if user}}
+      <a href="/auth/logout"><button type="button" name="" id="" class="btn btn-primary">LOGOUT</button></a>
+      {{else}}
+       <a href="/auth/login"><button type="button" name="" id="" class="btn btn-primary">LOGIN</button></a>
+      {{/if}}
+
     </div>
   </div>
 </div>
