@@ -55,7 +55,9 @@ small {
 
 nav {
   text-align: center;
-  margin-top: 2%; }
+  margin-top: 2%;
+  font-size: 1.1rem;
+  color: #FF8C64; }
 
 .loginFb {
   margin-top: 80%; }
@@ -215,5 +217,31 @@ nav {
 
 .imageInfo img {
   width: 100%; }
+
+@media (min-width: 700px) {
+  body {
+    background-image: url("/images/mapTreasure2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: screen; }
+  .container {
+    height: 100vh;
+    width: 100vw;
+    padding-top: 0%;
+    margin-top: 0%;
+    background-image: none; }
+  .rowIndex {
+    display: flex;
+    flex-direction: column; }
+  .mapImg {
+    border: 5px solid white; }
+  .buttonLogin {
+    margin-top: 0%;
+    padding-bottom: 0%; }
+  nav {
+    text-align: center;
+    margin-top: 0%;
+    font-size: 1.1rem;
+    color: whitesmoke; } }
 
 /*# sourceMappingURL=style.css.map */
