@@ -4,7 +4,7 @@ body {
 
 .container {
   background-image: url("/images/mapTreasure2.jpg");
-  background-repeat: no-repeat;
+  background-repeat: repeat-y;
   background-size: cover;
   background-blend-mode: difference;
   height: 87vh;
@@ -42,7 +42,7 @@ a {
   font-size: 1.0rem; }
 
 small {
-  color: whitesmoke; }
+  color: #FF8C64; }
 
 .buttonLogin {
   margin-top: 5%;
@@ -80,14 +80,25 @@ nav {
 
 .buttonChoice {
   width: 100%;
-  margin: 5% auto; }
+  margin: 0% auto; }
 
 .buttonChoice h4 {
+  color: #4d90fe;
+  padding: 5%;
   border: 2px solid white;
   border-radius: 10px; }
 
 .buttonChoice p {
   font-size: 0.8rem; }
+
+.myPictures {
+  margin-top: 5%;
+  padding: 10%;
+  border: 2px solid transparent;
+  box-shadow: 0 2px 6px rgba(236, 231, 231, 0.8); }
+
+.myPictures:hover {
+  background: rgba(125, 107, 125, 0.562); }
 
 .profileRow {
   margin: 0 auto; }
@@ -351,5 +362,15 @@ nav {
   opacity: 0.8;
   padding: 0% 10%;
   border-radius: 5%; }
+
+footer {
+  position: fixed;
+  background: black;
+  display: block;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 5vh;
+  align-items: center; }
 
 /*# sourceMappingURL=style.css.map */
