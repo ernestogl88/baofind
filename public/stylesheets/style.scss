@@ -35,7 +35,7 @@ h3{
 
 h4 {
   color: $color-blue;
-
+  
 }
 
 h5 {
@@ -73,6 +73,8 @@ small {
 nav {
   text-align: center;
   margin-top: 2%;
+  font-size: 1.1rem;
+  color: $color-orange;
 }
 
 .loginFb {
@@ -82,7 +84,7 @@ nav {
 .buttonChoice {
   width: 100%;
   margin: 5% auto;
-  }
+}
 .buttonChoice h4 {
   
   border: 2px solid white;
@@ -220,7 +222,7 @@ nav {
   width: 95%;
   border: 2px solid $color-blue;
   border-radius: 10px;
-
+  
 }
 
 .createGameButton {
@@ -261,3 +263,38 @@ nav {
 }
 
 
+@media (min-width: 700px) { 
+  body {
+    background-image: url("/images/mapTreasure2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: screen;
+  }
+  .container {
+    height: 100vh;
+    width: 100vw;
+    padding-top: 0%;
+    margin-top: 0%;
+    background-image: none;
+  }
+  .rowIndex {
+    display: flex;
+    flex-direction: column
+  }
+  .mapImg{
+   // height: 100vh;
+ //   width: 50%;
+    border: 5px solid white;
+  }
+  .buttonLogin {
+    margin-top: 0%;
+    padding-bottom: 0%
+
+  }
+  nav {
+    text-align: center;
+    margin-top: 0%;
+    font-size: 1.1rem;
+    color: $color-white;
+  }
+}
