@@ -15,8 +15,12 @@ router.get("/newGame", (req, res) => {
 });
 
 router.post("/newGame", (req, res) => {
-  if(req.body.gameTitle === '' || req.body.startDate === '' || req.body.endDate===''){
-    res.render('game/newGame', {message: 'Error filling the form'})
+  if (
+    req.body.gameTitle === "" ||
+    req.body.startDate === "" ||
+    req.body.endDate === ""
+  ) {
+    res.render("game/newGame", { message: "Error filling the form" });
   }
   let spotsId = [];
   let spots = [];
@@ -72,15 +76,23 @@ router.get("/joinGame", (req, res) => {
 });
 
 router.get("/joinGame/:id", (req, res) => {
-  Game.findByIdAndUpdate(req.params.id, {
-    $push: { users: req.user._id }
-  },{new: true})
+  Game.findByIdAndUpdate(
+    req.params.id,
+    {
+      $addToSet: { users: req.user._id }
+    },
+    { new: true }
+  )
     .populate("map")
     .then(game => {
-      User.findByIdAndUpdate(req.user._id, {
-        currentGame: game._id,
-        currentSpot: game.map.spots[0]
-      }, {new:true}).then(user => {
+      User.findByIdAndUpdate(
+        req.user._id,
+        {
+          currentGame: game._id,
+          currentSpot: game.map.spots[0]
+        },
+        { new: true }
+      ).then(user => {
         res.redirect(`/game/clue/${user.currentSpot}`);
       });
     });
@@ -118,15 +130,23 @@ router.post("/clue/uploadPhoto", uploadCloud.single("photo"), (req, res) => {
         .populate("map")
         .then(game => {
           let spotNumber = game.map.spots.indexOf(user.currentSpot);
-          console.log(spotNumber+'********************'+game.map.spots.length);
-          if (spotNumber === game.map.spots.length-1) {
-            res.render("game/winner");
+          if (spotNumber === game.map.spots.length - 1) {
+            Game.findByIdAndUpdate(user.currentGame, { status: false }).then(
+              game => {
+                User.findByIdAndUpdate(user._id, {
+                  $push: { rewardsWin: game.reward }
+                }).then(res.render("game/winner", {game}));
+              }
+            );
           } else {
-            User.findByIdAndUpdate(req.user._id, {
-              currentSpot: game.map.spots[spotNumber+1]
-            },{new: true})
-            .then(() => {
-              res.redirect(`/game/clue/${game.map.spots[spotNumber+1]}`);
+            User.findByIdAndUpdate(
+              req.user._id,
+              {
+                currentSpot: game.map.spots[spotNumber + 1]
+              },
+              { new: true }
+            ).then(() => {
+              res.redirect(`/game/clue/${game.map.spots[spotNumber + 1]}`);
             });
           }
         });
@@ -144,10 +164,6 @@ router.get("/clue/:_id/:lat/:lng", (req, res) => {
     let lngDif = 0.001172673 * 10;
     let lngSpot = +spot.lng;
     let latSpot = +spot.lat;
-    // console.log(latPhoto);
-    // console.log(spot.lat);
-    // console.log(lngPhoto);
-    // console.log(spot.lng);
     if (
       latPhoto >= latSpot - latDif &&
       latPhoto <= latSpot + latDif &&
