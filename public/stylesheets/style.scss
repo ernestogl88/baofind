@@ -78,6 +78,9 @@ small {
 }
 
 nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   text-align: center;
   margin-top: 2%;
   font-size: 1.1rem;

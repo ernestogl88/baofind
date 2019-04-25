@@ -15,6 +15,9 @@ router.get("/newGame", (req, res) => {
 });
 
 router.post("/newGame", (req, res) => {
+  if(req.body.gameTitle === '' || req.body.startDate === '' || req.body.endDate===''){
+    res.render('game/newGame', {message: 'Error filling the form'})
+  }
   let spotsId = [];
   let spots = [];
   for (var i = 0; i < req.body.totalSpots; i++) {

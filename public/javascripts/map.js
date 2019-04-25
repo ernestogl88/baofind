@@ -157,7 +157,6 @@ function setDragendListeners(markers){
       let index = markers.indexOf(marker);
       markers.slice(index, 1);
       drawMarkersInfo(markers);
-      console.log(markers);
     });
   });
 }
