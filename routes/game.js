@@ -36,8 +36,8 @@ router.post("/newGame", (req, res) => {
   });
   let game = new Game({
     name: req.body.gameTitle,
-    users: [req.user._id],
     startDate: req.body.startDate,
+    users: [req.user._id],
     finishDate: req.body.endDate,
     reward: req.body.gameReward
   });
@@ -71,14 +71,15 @@ router.get("/joinGame", (req, res) => {
 router.get("/joinGame/:id", (req, res) => {
   Game.findByIdAndUpdate(req.params.id, {
     $push: { users: req.user._id }
-  })
+  },{new: true})
     .populate("map")
     .then(game => {
-      User.findByIdAndUpdate(req.user._id, { currentGame: req.params.id }).then(
-        user => {
-          res.redirect(`/game/clue/${game.map.spots[0]}`);
-        }
-      );
+      User.findByIdAndUpdate(req.user._id, {
+        currentGame: game._id,
+        currentSpot: game.map.spots[0]
+      }, {new:true}).then(user => {
+        res.redirect(`/game/clue/${user.currentSpot}`);
+      });
     });
 });
 
@@ -95,20 +96,37 @@ router.get("/nearPlaces/:lat/:long", (req, res) => {
 });
 
 router.get("/clue/:id", (req, res) => {
-  console.log("dentro del detalle de clue");
   Spot.findById(req.params.id).then(spot => {
     res.render("game/clue", { spot });
   });
 });
 
-router.post("/clue", uploadCloud.single("photo"), (req, res) => {
-  const { picture } = req.body;
+router.post("/clue/uploadPhoto", uploadCloud.single("photo"), (req, res) => {
   const imgPath = req.file.url;
-  User.findByIdandUpdate(req.user.id, {
-    $push: { pictures: imgPath }
-  })
-    .then(spot => {
-      res.render("game/clue");
+  User.findByIdAndUpdate(
+    req.user._id,
+    {
+      $push: { pictures: imgPath }
+    },
+    { new: true }
+  )
+    .then(user => {
+      Game.findById(user.currentGame)
+        .populate("map")
+        .then(game => {
+          let spotNumber = game.map.spots.indexOf(user.currentSpot);
+          console.log(spotNumber+'********************'+game.map.spots.length);
+          if (spotNumber === game.map.spots.length-1) {
+            res.render("game/winner");
+          } else {
+            User.findByIdAndUpdate(req.user._id, {
+              currentSpot: game.map.spots[spotNumber+1]
+            },{new: true})
+            .then(() => {
+              res.redirect(`/game/clue/${game.map.spots[spotNumber+1]}`);
+            });
+          }
+        });
     })
     .catch(error => {
       console.log(error);
@@ -119,16 +137,16 @@ router.get("/clue/:_id/:lat/:lng", (req, res) => {
   const latPhoto = +req.params.lat;
   const lngPhoto = +req.params.lng;
   Spot.findById(req.params._id).then(spot => {
-    let latDif = 0.000898315*10;
-    let lngDif = 0.001172673*10;
+    let latDif = 0.000898315 * 10;
+    let lngDif = 0.001172673 * 10;
     let lngSpot = +spot.lng;
     let latSpot = +spot.lat;
-    console.log(latPhoto);
-    console.log(spot.lat);
-    console.log(lngPhoto);
-    console.log(spot.lng);
+    // console.log(latPhoto);
+    // console.log(spot.lat);
+    // console.log(lngPhoto);
+    // console.log(spot.lng);
     if (
-      latPhoto >= latSpot- latDif &&
+      latPhoto >= latSpot - latDif &&
       latPhoto <= latSpot + latDif &&
       lngPhoto >= lngSpot - lngDif &&
       lngPhoto <= lngSpot + lngDif
