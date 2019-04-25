@@ -2,6 +2,11 @@ const myCurrentCoords = {
   lat: 40.4136667,
   lng: -3.7045938
 };
+let start = document.getElementsByName('startDate')[0];
+let end = document.getElementsByName('endDate')[0];
+start.addEventListener('change', function() {
+  if (start.value) end.min = start.value;
+}, false);
 
 const map = new google.maps.Map(document.getElementById("map"), {
   zoom: 15.5,
