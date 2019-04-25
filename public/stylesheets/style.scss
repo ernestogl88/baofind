@@ -10,16 +10,17 @@ $color-blue: #A3A1A8;
 $color-red: #FF665A;
 $color-purpure: #7D6B7D;
 $color-white: whitesmoke;
+$color-black: black;
 
 .container {
   background-image: url("/images/mapTreasure2.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  background-blend-mode: screen;
+  background-blend-mode: difference;
   height: 87vh;
   width: 100vw;
   margin-top: 5%;
-  padding-top: 10%;
+  padding-top: 5%;
   text-align: center;
   filter: bright(0.3)
 }
@@ -31,28 +32,34 @@ h1{
 
 h3{
   color: $color-red;
+  font-weight: 700;
 }
 
 h4 {
-  color: $color-blue;
-  
+  color: $color-black;
+  font-weight: 800;
 }
 
 h5 {
   color: $color-white;
+  font-weight: 800;
 }
 h6 {
   color: $color-orange;
 }
 p{
-  color: $color-yellow;
+  color: $color-white;
 }
 a {
-  color: $color-purpure;
+  color: $color-blue;
+  font-weight: bold;
+  font-size: 1.0rem;
 }
 small {
   color: $color-white;
 }
+
+//Home
 
 .buttonLogin{
   margin-top: 5% ;
@@ -77,8 +84,19 @@ nav {
   color: $color-orange;
 }
 
+//Login
+
+.spinner {
+  margin-top: 30%;
+  visibility: hidden;
+}
+.show-spinner {
+  margin-top: 30%;
+  display: block;
+}
+
 .loginFb {
-  margin-top: 80%;
+  margin-top: 30%;
 }
 
 .buttonChoice {
@@ -94,14 +112,24 @@ nav {
 .buttonChoice p {
   font-size: 0.8rem;
 }
+
+//Profile
+.profileRow {
+  margin: 0 auto;
+}
 .imgProfile {
+  margin-top: 5%;
   opacity: 0.8;
+  border: 2px solid $color-purpure;
+  border-radius: 20%;
 }
 .imgPlay {
+  margin-top: 10%;  
   width: 40%;
 }
 
 .buttonChoiceGame {
+  margin-top: 5%;
   opacity: 1;
 }
 .card-header {
@@ -109,6 +137,7 @@ nav {
 }
 
 .profileCard {
+  margin-top: 2%;
   background: transparent
 }
 
@@ -167,8 +196,67 @@ nav {
 }
 
 
-// CreateGame
-
+// NewGame
+#description {
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+}
+#infowindow-content .title {
+  font-weight: bold;
+}
+#infowindow-content {
+  display: none;
+}
+#map #infowindow-content {
+  display: inline;
+}
+.pac-card {
+  margin: 10px 10px 0 0;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  font-family: Roboto;
+}
+#pac-container {
+  padding-bottom: 12px;
+  margin-right: 12px;
+}
+.pac-controls {
+  display: inline-block;
+  padding: 5px 11px;
+}
+.pac-controls label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+#pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 400px;
+}
+#pac-input:focus {
+  border-color: #4d90fe;
+}
+#title {
+  color: #fff;
+  background-color: #4d90fe;
+  font-size: 25px;
+  font-weight: 500;
+  padding: 6px 12px;
+}
+#target {
+  width: 345px;
+}
 .containerNewGame {
   background-image: url("/images/mapTreasure2.jpg");
   background-repeat: no-repeat;
@@ -297,4 +385,33 @@ nav {
     font-size: 1.1rem;
     color: $color-white;
   }
+}
+
+
+//JoinGame
+.cardGames{
+  background: rgba(170, 165, 165,0.3);
+  width:18rem;
+  border: 2px solid $color-yellow;
+  border-radius: 10px;
+  margin: 10% auto;
+}
+.card-body  {
+  display:inline;
+  //border:2px solid blue;
+}
+.card-title {
+  font-weight: bold;
+  //border: 2px solid blue;
+}
+.card-subtitle {
+  font-weight: 600;
+}
+.card-link {
+  background-color: $color-yellow;
+  border: 10px double $color-blue;
+  opacity: 0.8;
+  padding: 0% 10%;
+  border-radius: 5%;
+  
 }

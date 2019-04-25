@@ -5,12 +5,27 @@
       <h3>Welcome to</h3>
       <h1>{{title}}</h1>
     </div>
-    <div class="col-sm">
+    <div class="col-sm spinner" id="spinner">
       <div class="spinner-border spinner-border-xl text-primary"></div>
     </div>
     <div class="col-sm buttonLogin">
-      <a href="/auth/facebook"><button type="button" name="" id="" class="btn btn-primary loginFb">Login with FACEBOOK</button></a>
-      
+      <button type="button" name="" id="buttLogin" class="btn btn-primary loginFb">Login with
+          FACEBOOK</button>
+
     </div>
   </div>
 </div>
+
+<script>
+  var buttLogin = document.getElementById("buttLogin")
+  var spinner = document.getElementById("spinner")
+  buttLogin.addEventListener("click", function() {
+
+    spinner.classList.toggle("show-spinner");
+    spinner.classList.remove("spinner")
+    setTimeout(function(){
+      window.location = "/auth/facebook"
+       }, 3000);
+  })
+
+</script>

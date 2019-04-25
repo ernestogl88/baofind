@@ -1,35 +1,19 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm">
+    <div class="col-sm gamesCard">
 
-      <h4>Join the</h4>
-      <h1>GAME NAME</h1>
-    </div>
-    <div class="col-sm">
-      <div class="media">
-        <div class="media-body">
-          <h5>Game Author</h5>
-          <p>This game will take you through the most historic streets of Madrid. Let's see how much you know about your
-            own city</p>
+      <div class="card-body">
+        {{#each games}}
+        <div class="cardGames">
+          <h2 class="card-title">{{name}}</h2>
+          <h5 class="card-subtitle mb-2 ">{{map.mapDescription}}</h5>
+          <p class="card-text">{{state}}</p>
+          <a href="/game/joinGame/{{_id}}" class="card-link">Join</a>
+
         </div>
+        {{/each}}
       </div>
     </div>
-    <div class="col-sm">
-      {{#each games}}
-        {{name}}
-        {{state}}
-        {{map.mapDescription}}
-        <a href="/game/joinGame/{{_id}}">Join the game</a>
-      {{/each}}
-      {{!-- <a href="/game/clue"><img src="/images/play.png" alt="" class="imgPlay"></a> --}}
-    </div>
 
-    <div class="col-sm">
-      <div class="col-sm buttonLogin">
-        <a href="/game/clue"><button type="button" name="" id="" class="btn btn-primary joinGame">JOIN
-            NOW</button></a>
 
-      </div>
-    </div>
   </div>
-</div>
