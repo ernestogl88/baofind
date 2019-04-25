@@ -6,14 +6,17 @@ body {
 
 $color-yellow: #FFF587;
 $color-orange: #FF8C64;
-$color-blue: #A3A1A8;
+$color-blue: #36474E;
 $color-red: #FF665A;
 $color-purpure: #7D6B7D;
 $color-white: whitesmoke;
 $color-black: black;
+$color-gray: #836A4C;
+$color-green: #798B4D;
+$color-brown: #261809;
 
 .container {
-  background-image: url("/images/mapTreasure2.jpg");
+  background-image: url("/images/mapTreasure3.jpg");
   background-repeat: repeat-y;
   background-size: cover;
   background-blend-mode: difference;
@@ -26,12 +29,12 @@ $color-black: black;
 }
 
 h1{
-  color: $color-yellow;
+  color: $color-green;
   font-weight: bold;
 }
 
 h3{
-  color: $color-red;
+  color: $color-brown;
   font-weight: 700;
 }
 
@@ -41,17 +44,17 @@ h4 {
 }
 
 h5 {
-  color: $color-white;
+  color: $color-gray;
   font-weight: 800;
 }
 h6 {
-  color: $color-orange;
+  color: $color-purpure;
 }
 p{
-  color: $color-white;
+  color: $color-black;
 }
 a {
-  color: $color-blue;
+  color: $color-green;
   font-weight: bold;
   font-size: 1.0rem;
 }
@@ -255,7 +258,9 @@ nav {
   margin-left: 12px;
   padding: 0 11px 0 13px;
   text-overflow: ellipsis;
-  width: 400px;
+  width: 300px;
+  border: 1px outset $color-green;
+  border-radius: 10px;
 }
 #pac-input:focus {
   border-color: #4d90fe;
@@ -271,17 +276,18 @@ nav {
   width: 345px;
 }
 .containerNewGame {
-  background-image: url("/images/mapTreasure2.jpg");
+  background-image: url("/images/mapTreasure3.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: screen;
-  height: 87vh;
+  height: 92vh;
   width: 100vw;
   margin-top: 5%;
   padding-top: 2%;
   text-align: center;
   filter: bright(0.3)
 }
+  
 
 #map {
   width:92vw; 
@@ -301,9 +307,10 @@ nav {
   justify-content: space-between;
   align-items: center;
   align-content: center;
-  border: 2px solid black;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  box-shadow: 10px 10px 6px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
-  color: $color-white
+  color: $color-brown
 }
 
 #markersInfoLabels{
@@ -314,8 +321,8 @@ nav {
   text-align: center;
   background:$color-blue;
   opacity: 0.8;
-  margin: 3px;
-  border: 2px solid $color-purpure;
+  margin-top: 3px;
+  border: 2px solid transparent;
   border-radius: 10px;
 }
 
@@ -435,7 +442,7 @@ footer {
   width: 100%;
   display: flex;
   justify-content: center;
-  height: 5vh;
+  height: 10vh;
   align-items: center;
  
 }
