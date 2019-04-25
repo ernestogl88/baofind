@@ -68,7 +68,7 @@ router.post("/newGame", (req, res) => {
 });
 
 router.get("/joinGame", (req, res) => {
-  Game.find()
+  Game.find({status: true})
     .populate("map")
     .then(games => {
       res.render("game/joinGame", { games, user: req.user });
@@ -135,7 +135,7 @@ router.post("/clue/uploadPhoto", uploadCloud.single("photo"), (req, res) => {
               game => {
                 User.findByIdAndUpdate(user._id, {
                   $push: { rewardsWin: game.reward }
-                }).then(res.render("game/winner", {game, user: req.user}));
+                }).then(res.render("game/winner", {game:game, user: req.user}));
               }
             );
           } else {

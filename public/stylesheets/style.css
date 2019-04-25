@@ -84,7 +84,7 @@ nav {
 
 .buttonChoice h4 {
   color: #4d90fe;
-  padding: 5%;
+  padding: 3%;
   border: 2px solid white;
   border-radius: 10px; }
 
@@ -249,7 +249,7 @@ nav {
   width: 92vw;
   height: 40vh;
   margin: 0 auto;
-  border: 2px solid black;
+  border: 1px solid black;
   border-radius: 10px; }
 
 #markersInfo {
@@ -375,5 +375,12 @@ footer {
   justify-content: center;
   height: 10vh;
   align-items: center; }
+
+#rewards {
+  margin-top: 6%; }
+
+#rewards h6 {
+  color: #261809;
+  font-weight: 700; }
 
 /*# sourceMappingURL=style.css.map */
