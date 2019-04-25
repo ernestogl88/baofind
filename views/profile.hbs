@@ -7,17 +7,18 @@
 
   <div class="row">
     <div class="col">
-      <img src="/images/profile.jpg"
+      <img src="http://graph.facebook.com/{{user.facebookId}}/picture?type=large"
         class="img-fluid border border-dark rounded imgProfile" alt="">
     </div>
     <div class="col">
       <div class="card profileCard">
         <div class="card-header">
-          <h5>Alberto González</h5>
+          <h5>{{user.username}}
+          </h5>
         </div>
         <div class="card-body rounded">
-          <h6 class="card-title">Game Name</h6>
-          <p class="card-text">Current Point: 5</p>
+          <h6 class="card-title">{{user.currentGame.name}}</h6>
+          <p class="card-text">Current Point: {{user.currentSpot.spotDescription}}</p>
         </div>
 
       </div>
