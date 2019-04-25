@@ -7,7 +7,7 @@ function getExif() {
     if (file && file.name) {
       EXIF.getData(file, function() {
         var exifData = EXIF.getAllTags(this);
-        if (exifData) {
+        if (exifData.GPSLatitude && exifData.GPSLongitude) {
           var latdegrees = exifData.GPSLatitude[0];
           var latminutes = exifData.GPSLatitude[1];
           var latseconds = exifData.GPSLatitude[2];
@@ -20,17 +20,20 @@ function getExif() {
           photoPosition.push(photoLng);
 
           let spotId = document.getElementById("spotId").value;
-          console.log(photoPosition)
           axios
             .get(
-              `https://baofind.herokuapp.com/game/clue/${spotId}/${photoPosition[0]}/${
+              `http://localhost:3000/game/clue/${spotId}/${photoPosition[0]}/${
                 photoPosition[1]
               }`
             )
             .then(response => {
               console.log(response.data.answer)
               if(response.data.answer === true) {
-                document.getElementById("sendButton").disabled = false
+                document.getElementById("sendButton").disabled = false;
+                document.getElementById('message').innerHTML=`The GPS coords match, you can upload your picture now`
+              }else{
+                document.getElementById('message').innerHTML=`The GPS coords don't match`;
+                document.getElementById("sendButton").disabled = true;
               }
             })
             .catch(error => {
@@ -38,7 +41,8 @@ function getExif() {
             });
           return photoPosition;
         } else {
-          alert("No EXIF data found in image '" + file.name + "'.");
+          document.getElementById('message').innerHTML=`The GPS coords don't match`;
+          document.getElementById("sendButton").disabled = true;
         }
       });
     }
