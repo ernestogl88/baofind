@@ -11,7 +11,7 @@ const Map = require("../models/Map");
 const User = require("../models/User.js");
 
 router.get("/newGame", (req, res) => {
-  res.render("game/newGame");
+  res.render("game/newGame", {user: req.user});
 });
 
 router.post("/newGame", (req, res) => {
@@ -20,7 +20,7 @@ router.post("/newGame", (req, res) => {
     req.body.startDate === "" ||
     req.body.endDate === ""
   ) {
-    res.render("game/newGame", { message: "Error filling the form" });
+    res.render("game/newGame", { message: "Error filling the form", user: req.user});
   }
   let spotsId = [];
   let spots = [];
@@ -60,7 +60,7 @@ router.post("/newGame", (req, res) => {
         game.map = map._id;
         return game
           .save()
-          .then(res.render("index"))
+          .then(res.render("index", {user: req.user}))
           .catch(err => console.log(err));
       });
     })
@@ -71,7 +71,7 @@ router.get("/joinGame", (req, res) => {
   Game.find()
     .populate("map")
     .then(games => {
-      res.render("game/joinGame", { games });
+      res.render("game/joinGame", { games, user: req.user });
     });
 });
 
@@ -112,7 +112,7 @@ router.get("/nearPlaces/:lat/:long", (req, res) => {
 
 router.get("/clue/:id", (req, res) => {
   Spot.findById(req.params.id).then(spot => {
-    res.render("game/clue", { spot });
+    res.render("game/clue", { spot , user: req.user});
   });
 });
 
@@ -135,7 +135,7 @@ router.post("/clue/uploadPhoto", uploadCloud.single("photo"), (req, res) => {
               game => {
                 User.findByIdAndUpdate(user._id, {
                   $push: { rewardsWin: game.reward }
-                }).then(res.render("game/winner", {game}));
+                }).then(res.render("game/winner", {game, user: req.user}));
               }
             );
           } else {
