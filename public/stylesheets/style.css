@@ -3,7 +3,7 @@ body {
   background: black; }
 
 .container {
-  background-image: url("/images/mapTreasure2.jpg");
+  background-image: url("/images/mapTreasure3.jpg");
   background-repeat: repeat-y;
   background-size: cover;
   background-blend-mode: difference;
@@ -15,11 +15,11 @@ body {
   filter: bright(0.3); }
 
 h1 {
-  color: #FFF587;
+  color: #798B4D;
   font-weight: bold; }
 
 h3 {
-  color: #FF665A;
+  color: #261809;
   font-weight: 700; }
 
 h4 {
@@ -27,17 +27,17 @@ h4 {
   font-weight: 800; }
 
 h5 {
-  color: whitesmoke;
+  color: #836A4C;
   font-weight: 800; }
 
 h6 {
-  color: #FF8C64; }
+  color: #7D6B7D; }
 
 p {
-  color: whitesmoke; }
+  color: black; }
 
 a {
-  color: #A3A1A8;
+  color: #798B4D;
   font-weight: bold;
   font-size: 1.0rem; }
 
@@ -162,7 +162,7 @@ nav {
   overflow: scroll; }
 
 .uploadPhoto {
-  color: #A3A1A8;
+  color: #36474E;
   margin: 0 auto; }
 
 .uploadPhoto input {
@@ -216,7 +216,9 @@ nav {
   margin-left: 12px;
   padding: 0 11px 0 13px;
   text-overflow: ellipsis;
-  width: 400px; }
+  width: 300px;
+  border: 1px outset #798B4D;
+  border-radius: 10px; }
 
 #pac-input:focus {
   border-color: #4d90fe; }
@@ -232,11 +234,11 @@ nav {
   width: 345px; }
 
 .containerNewGame {
-  background-image: url("/images/mapTreasure2.jpg");
+  background-image: url("/images/mapTreasure3.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: screen;
-  height: 87vh;
+  height: 92vh;
   width: 100vw;
   margin-top: 5%;
   padding-top: 2%;
@@ -260,29 +262,30 @@ nav {
   justify-content: space-between;
   align-items: center;
   align-content: center;
-  border: 2px solid black;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  box-shadow: 10px 10px 6px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
-  color: whitesmoke; }
+  color: #261809; }
 
 #markersInfoLabels {
   margin: 5px; }
 
 #markersInfoInputs {
   text-align: center;
-  background: #A3A1A8;
+  background: #36474E;
   opacity: 0.8;
-  margin: 3px;
-  border: 2px solid #7D6B7D;
+  margin-top: 3px;
+  border: 2px solid transparent;
   border-radius: 10px; }
 
 #markersInfo input {
   width: 95%;
-  border: 2px solid #A3A1A8;
+  border: 2px solid #36474E;
   border-radius: 10px; }
 
 .createGameButton {
   margin-top: 5%;
-  background-color: #A3A1A8;
+  background-color: #36474E;
   color: whitesmoke;
   border: 2px solid #FFF587;
   padding: 3%;
@@ -304,7 +307,7 @@ nav {
   height: 20%; }
 
 .imageInfo {
-  background-color: #A3A1A8;
+  background-color: #36474E;
   justify-content: space-between;
   align-items: center;
   display: flex;
@@ -358,7 +361,7 @@ nav {
 
 .card-link {
   background-color: #FFF587;
-  border: 10px double #A3A1A8;
+  border: 10px double #36474E;
   opacity: 0.8;
   padding: 0% 10%;
   border-radius: 5%; }
@@ -370,7 +373,7 @@ footer {
   width: 100%;
   display: flex;
   justify-content: center;
-  height: 5vh;
+  height: 10vh;
   align-items: center; }
 
 /*# sourceMappingURL=style.css.map */
