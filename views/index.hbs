@@ -7,13 +7,34 @@
     <div class="col-sm mapImg">
       <img src="/images/map.png" class="img-fluid rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle" alt="">
     </div>
+    <div class="col-sm spinner" id="spinner">
+      <div class="spinner-border spinner-border-xl text-primary"></div>
+    </div>
+
+  </div>
     <div class="col-sm buttonLogin">
       {{#if user}}
       <a href="/auth/logout"><button type="button" name="" id="" class="btn btn-primary">LOGOUT</button></a>
       {{else}}
-       <a href="/auth/login"><button type="button" name="" id="" class="btn btn-primary">LOGIN</button></a>
+       <button type="button" name="" id="buttLogin" class="btn btn-primary">LOGIN WITH FACEBOOK</button>
       {{/if}}
 
     </div>
   </div>
 </div>
+{{#if user}}
+{{else}}
+<script>
+  
+  var buttLogin = document.getElementById("buttLogin")
+  var spinner = document.getElementById("spinner")
+  buttLogin.addEventListener("click", function() {
+
+    spinner.classList.toggle("show-spinner");
+    spinner.classList.remove("spinner")
+    setTimeout(function(){
+      window.location = "/auth/facebook"
+       }, 2000);
+  })
+</script>
+{{/if}}

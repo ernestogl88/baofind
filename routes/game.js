@@ -5,12 +5,13 @@ const router = express.Router();
 const Game = require("../models/Game");
 const request = require("request-promise");
 const uploadCloud = require("../config/cloudinary.js");
+const ensureLogin = require("connect-ensure-login");
 const Spot = require("../models/Spots");
 const multer = require("multer");
 const Map = require("../models/Map");
 const User = require("../models/User.js");
 
-router.get("/newGame", (req, res) => {
+router.get("/newGame", ensureLogin.ensureLoggedIn('/auth/facebook'), (req, res) => {
   res.render("game/newGame", {user: req.user});
 });
 
@@ -67,7 +68,7 @@ router.post("/newGame", (req, res) => {
     .catch(err => console.log(err));
 });
 
-router.get("/joinGame", (req, res) => {
+router.get("/joinGame", ensureLogin.ensureLoggedIn('/auth/facebook'),(req, res) => {
   Game.find({status: true})
     .populate("map")
     .then(games => {
@@ -110,7 +111,7 @@ router.get("/nearPlaces/:lat/:long", (req, res) => {
     });
 });
 
-router.get("/clue/:id", (req, res) => {
+router.get("/clue/:id",ensureLogin.ensureLoggedIn('/auth/facebook'), (req, res) => {
   Spot.findById(req.params.id).then(spot => {
     res.render("game/clue", { spot , user: req.user});
   });

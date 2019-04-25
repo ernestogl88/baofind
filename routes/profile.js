@@ -3,19 +3,10 @@ const router  = express.Router();
 const User = require('../models/User')
 const Spot = require('../models/Spots')
 const Game = require('../models/Game')
-/* GET home page */
-/* router.get('/', (req, res) => {
-  
-  User.findById(req.user.id).then(user => {
-    res.render('profile', {user})
-  })
-  .catch(err => {
-    res.status(500).send ({message: `Error to find the user ${err}`})
-  })
+const ensureLogin = require("connect-ensure-login");
 
-}); */
 
-router.get('/', (req,res) => {
+router.get('/', ensureLogin.ensureLoggedIn('/auth/facebook'),(req,res) => {
   User.findById(req.user.id)
   .populate('currentGame')
   .populate('currentSpot')
@@ -27,7 +18,7 @@ router.get('/', (req,res) => {
   })
 })
 
-router.get('/myPictures', (req,res)=>{
+router.get('/myPictures', ensureLogin.ensureLoggedIn('/auth/facebook'),(req,res)=>{
   User.findById(req.user.id).then(user => {
     res.render('myPictures', {user})
   })
