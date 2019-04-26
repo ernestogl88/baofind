@@ -6,7 +6,8 @@ const userSchema = new Schema({
   username: {type: String, required:true},
   pictures: [{type: String}],
   currentGame: { type: Schema.Types.ObjectId, ref: "Game"},
-  currentSpot: { type: Schema.Types.ObjectId, ref: "Spots"}
+  currentSpot: { type: Schema.Types.ObjectId, ref: "Spots"},
+  rewardsWin: [String]
 })
 
 const User = mongoose.model('User', userSchema);

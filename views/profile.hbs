@@ -7,11 +7,10 @@
 
   <div class="row profileRow">
     <div class="col">
-      <img src="http://graph.facebook.com/{{user.facebookId}}/picture?type=large"
-        class="img-fluid imgProfile" alt="">
-        <div class="myPictures">
-          <a name="" id="" class="btn btn-primary" href="/profile/myPictures" role="button">Pictures</a>
-        </div>
+      <img src="http://graph.facebook.com/{{user.facebookId}}/picture?type=large" class="img-fluid imgProfile" alt="">
+      <div class="myPictures">
+        <a name="" id="" class="btn btn-primary" href="/profile/myPictures" role="button">Pictures</a>
+      </div>
     </div>
     <div class="col">
       <div class="card profileCard">
@@ -19,25 +18,37 @@
           <h5>{{user.username}}
           </h5>
         </div>
+        {{#if user.currentGame}}
         <div class="card-body rounded">
-          <h4 class="card-title">{{user.currentGame.name}}</h4>
-          <p class="card-text">Current Point: {{user.currentSpot.spotDescription}}</p>
+          <h6 class="card-title">Current Game: {{user.currentGame.name}}</h6>
         </div>
+        <a name="" id="" class="btn btn-primary" href="/game/clue/{{user.currentSpot._id}}" role="button">Resume
+          Game</a>
+        {{/if}}
 
       </div>
     </div>
 
   </div>
+  <div id="rewards"> 
+    <h6>Rewards List: {{#each user.rewardsWin}}{{this}}{{/each}}</h6>
+  </div>
 
   <div class="row buttonChoice">
     <div class="col">
-      <a name="" id="" class="btn buttonChoiceGame" href="/game/newGame" role="button"><h4>Create Game</h4><p>Create your own game and invite your friends to start a challenge</p></a>
-    
+      <a name="" id="" class="btn buttonChoiceGame" href="/game/newGame" role="button">
+        <h4>Create Game</h4>
+        <p>Create your own game and invite your friends to start a challenge</p>
+      </a>
+
     </div>
   </div>
   <div class="row buttonChoice">
-       <div class="col">
-      <a name="" id="" class="btn  buttonChoiceGame" href="/game/joinGame" role="button"><h4>Join Game</h4><p>Join a friend challenge and prove your habilities</p></a>
+    <div class="col">
+      <a name="" id="" class="btn  buttonChoiceGame" href="/game/joinGame" role="button">
+        <h4>Join Game</h4>
+        <p>Join a friend challenge and prove your habilities</p>
+      </a>
     </div>
   </div>
 </div>

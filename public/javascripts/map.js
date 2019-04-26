@@ -111,7 +111,7 @@ function drawMarkersInfo(markers) {
     let long = marker.position.lng();
     let photoRef;
     axios
-      .get(`http://localhost:3000/game/nearPlaces/${lat}/${long}`)
+      .get(`https://baofind.herokuapp.com/game/nearPlaces/${lat}/${long}`)
       .then(nearestPoint => {
         if (nearestPoint.data.results[1].photos === undefined) {
           photoRef = nearestPoint.data.results[2].photos[0].photo_reference;

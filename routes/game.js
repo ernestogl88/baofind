@@ -5,18 +5,23 @@ const router = express.Router();
 const Game = require("../models/Game");
 const request = require("request-promise");
 const uploadCloud = require("../config/cloudinary.js");
+const ensureLogin = require("connect-ensure-login");
 const Spot = require("../models/Spots");
 const multer = require("multer");
 const Map = require("../models/Map");
 const User = require("../models/User.js");
 
-router.get("/newGame", (req, res) => {
-  res.render("game/newGame");
+router.get("/newGame", ensureLogin.ensureLoggedIn('/auth/facebook'), (req, res) => {
+  res.render("game/newGame", {user: req.user});
 });
 
 router.post("/newGame", (req, res) => {
-  if(req.body.gameTitle === '' || req.body.startDate === '' || req.body.endDate===''){
-    res.render('game/newGame', {message: 'Error filling the form'})
+  if (
+    req.body.gameTitle === "" ||
+    req.body.startDate === "" ||
+    req.body.endDate === ""
+  ) {
+    res.render("game/newGame", { message: "Error filling the form", user: req.user});
   }
   let spotsId = [];
   let spots = [];
@@ -56,31 +61,39 @@ router.post("/newGame", (req, res) => {
         game.map = map._id;
         return game
           .save()
-          .then(res.render("index"))
+          .then(res.render("index", {user: req.user}))
           .catch(err => console.log(err));
       });
     })
     .catch(err => console.log(err));
 });
 
-router.get("/joinGame", (req, res) => {
-  Game.find()
+router.get("/joinGame", ensureLogin.ensureLoggedIn('/auth/facebook'),(req, res) => {
+  Game.find({status: true})
     .populate("map")
     .then(games => {
-      res.render("game/joinGame", { games });
+      res.render("game/joinGame", { games, user: req.user });
     });
 });
 
 router.get("/joinGame/:id", (req, res) => {
-  Game.findByIdAndUpdate(req.params.id, {
-    $push: { users: req.user._id }
-  },{new: true})
+  Game.findByIdAndUpdate(
+    req.params.id,
+    {
+      $addToSet: { users: req.user._id }
+    },
+    { new: true }
+  )
     .populate("map")
     .then(game => {
-      User.findByIdAndUpdate(req.user._id, {
-        currentGame: game._id,
-        currentSpot: game.map.spots[0]
-      }, {new:true}).then(user => {
+      User.findByIdAndUpdate(
+        req.user._id,
+        {
+          currentGame: game._id,
+          currentSpot: game.map.spots[0]
+        },
+        { new: true }
+      ).then(user => {
         res.redirect(`/game/clue/${user.currentSpot}`);
       });
     });
@@ -98,9 +111,9 @@ router.get("/nearPlaces/:lat/:long", (req, res) => {
     });
 });
 
-router.get("/clue/:id", (req, res) => {
+router.get("/clue/:id",ensureLogin.ensureLoggedIn('/auth/facebook'), (req, res) => {
   Spot.findById(req.params.id).then(spot => {
-    res.render("game/clue", { spot });
+    res.render("game/clue", { spot , user: req.user});
   });
 });
 
@@ -118,15 +131,23 @@ router.post("/clue/uploadPhoto", uploadCloud.single("photo"), (req, res) => {
         .populate("map")
         .then(game => {
           let spotNumber = game.map.spots.indexOf(user.currentSpot);
-          console.log(spotNumber+'********************'+game.map.spots.length);
-          if (spotNumber === game.map.spots.length-1) {
-            res.render("game/winner");
+          if (spotNumber === game.map.spots.length - 1) {
+            Game.findByIdAndUpdate(user.currentGame, { status: false }).then(
+              game => {
+                User.findByIdAndUpdate(user._id, {
+                  $push: { rewardsWin: game.reward }
+                }).then(res.render("game/winner", {game:game, user: req.user}));
+              }
+            );
           } else {
-            User.findByIdAndUpdate(req.user._id, {
-              currentSpot: game.map.spots[spotNumber+1]
-            },{new: true})
-            .then(() => {
-              res.redirect(`/game/clue/${game.map.spots[spotNumber+1]}`);
+            User.findByIdAndUpdate(
+              req.user._id,
+              {
+                currentSpot: game.map.spots[spotNumber + 1]
+              },
+              { new: true }
+            ).then(() => {
+              res.redirect(`/game/clue/${game.map.spots[spotNumber + 1]}`);
             });
           }
         });
@@ -144,10 +165,6 @@ router.get("/clue/:_id/:lat/:lng", (req, res) => {
     let lngDif = 0.001172673 * 10;
     let lngSpot = +spot.lng;
     let latSpot = +spot.lat;
-    // console.log(latPhoto);
-    // console.log(spot.lat);
-    // console.log(lngPhoto);
-    // console.log(spot.lng);
     if (
       latPhoto >= latSpot - latDif &&
       latPhoto <= latSpot + latDif &&
