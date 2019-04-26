@@ -22,7 +22,7 @@ function getExif() {
           let spotId = document.getElementById("spotId").value;
           axios
             .get(
-              `https://baofind.herokuapp.com/game/clue/${spotId}/${photoPosition[0]}/${
+              `http://localhost:300/game/clue/${spotId}/${photoPosition[0]}/${
                 photoPosition[1]
               }`
             )

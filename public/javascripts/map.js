@@ -4,6 +4,19 @@ const myCurrentCoords = {
 };
 let start = document.getElementsByName('startDate')[0];
 let end = document.getElementsByName('endDate')[0];
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+ if(dd<10){
+        dd='0'+dd
+    } 
+    if(mm<10){
+        mm='0'+mm
+    } 
+
+today = yyyy+'-'+mm+'-'+dd;
+start.setAttribute('min',today)
 start.addEventListener('change', function() {
   if (start.value) end.min = start.value;
 }, false);
@@ -111,7 +124,7 @@ function drawMarkersInfo(markers) {
     let long = marker.position.lng();
     let photoRef;
     axios
-      .get(`https://baofind.herokuapp.com/game/nearPlaces/${lat}/${long}`)
+      .get(`http://localhost:3000/game/nearPlaces/${lat}/${long}`)
       .then(nearestPoint => {
         if (nearestPoint.data.results[1].photos === undefined) {
           photoRef = nearestPoint.data.results[2].photos[0].photo_reference;
