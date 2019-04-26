@@ -157,7 +157,7 @@ function drawMarkersInfo(markers) {
         let div2 = document.createElement("div");
         div2.appendChild(img);
         let input = document.createElement("textarea");
-        input.setAttribute("rows", "3");
+        input.setAttribute("rows", "4");
         input.setAttribute("columns", "20");
         div2.appendChild(input);
         container.appendChild(div2);
