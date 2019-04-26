@@ -15,6 +15,10 @@ $color-gray: #836A4C;
 $color-green: #798B4D;
 $color-brown: #261809;
 
+.whiteA {
+  color: white !important
+}
+
 .container {
   background-image: url("/images/mapTreasure3.jpg");
   background-repeat: repeat-y;
@@ -457,3 +461,4 @@ footer {
   color: #261809;
   font-weight: 700
 }
+

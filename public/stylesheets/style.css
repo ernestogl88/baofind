@@ -2,6 +2,9 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background: black; }
 
+.whiteA {
+  color: white !important; }
+
 .container {
   background-image: url("/images/mapTreasure3.jpg");
   background-repeat: repeat-y;

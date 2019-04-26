@@ -2,24 +2,28 @@ const myCurrentCoords = {
   lat: 40.4136667,
   lng: -3.7045938
 };
-let start = document.getElementsByName('startDate')[0];
-let end = document.getElementsByName('endDate')[0];
+let start = document.getElementsByName("startDate")[0];
+let end = document.getElementsByName("endDate")[0];
 var today = new Date();
 var dd = today.getDate();
-var mm = today.getMonth()+1; //January is 0!
+var mm = today.getMonth() + 1; //January is 0!
 var yyyy = today.getFullYear();
- if(dd<10){
-        dd='0'+dd
-    } 
-    if(mm<10){
-        mm='0'+mm
-    } 
+if (dd < 10) {
+  dd = "0" + dd;
+}
+if (mm < 10) {
+  mm = "0" + mm;
+}
 
-today = yyyy+'-'+mm+'-'+dd;
-start.setAttribute('min',today)
-start.addEventListener('change', function() {
-  if (start.value) end.min = start.value;
-}, false);
+today = yyyy + "-" + mm + "-" + dd;
+start.setAttribute("min", today);
+start.addEventListener(
+  "change",
+  function() {
+    if (start.value) end.min = start.value;
+  },
+  false
+);
 
 const map = new google.maps.Map(document.getElementById("map"), {
   zoom: 15.5,
@@ -85,6 +89,7 @@ searchBox.addListener("places_changed", function() {
 
 function placeMarker(position, map) {
   var marker = new google.maps.Marker({
+    title: markers.length + "",
     position: position,
     map: map,
     draggable: true
@@ -117,6 +122,7 @@ function setFormIds() {
 }
 
 function drawMarkersInfo(markers) {
+  console.log(markers);
   let container = document.getElementById("imageInfo");
   container.innerHTML = "";
   markers.forEach(marker => {
@@ -124,7 +130,7 @@ function drawMarkersInfo(markers) {
     let long = marker.position.lng();
     let photoRef;
     axios
-      .get(`http://localhost:3000/game/nearPlaces/${lat}/${long}`)
+      .get(`https://baofind.herokuapp.com/game/nearPlaces/${lat}/${long}`)
       .then(nearestPoint => {
         if (nearestPoint.data.results[1].photos === undefined) {
           photoRef = nearestPoint.data.results[2].photos[0].photo_reference;
@@ -160,6 +166,11 @@ function drawMarkersInfo(markers) {
         input.setAttribute("rows", "4");
         input.setAttribute("columns", "20");
         div2.appendChild(input);
+        let button = document.createElement("a");
+        button.setAttribute('class','whiteA')
+        button.setAttribute("onclick", `deleteSpot('${marker.title}')`);
+        button.innerHTML = "Delete Spot";
+        div2.appendChild(button);
         container.appendChild(div2);
         setFormIds();
       })
@@ -169,7 +180,7 @@ function drawMarkersInfo(markers) {
   });
 }
 
-function setDragendListeners(markers){
+function setDragendListeners(markers) {
   markers.forEach(marker => {
     google.maps.event.addListener(marker, "dragend", function(marker) {
       let index = markers.indexOf(marker);
@@ -177,4 +188,15 @@ function setDragendListeners(markers){
       drawMarkersInfo(markers);
     });
   });
+}
+
+function deleteSpot(title) {
+  let index
+  markers.forEach((marker,idx)=>{
+    if(marker.title === title)
+    index = idx;
+  })
+  markers[index].setMap(null)
+  markers.splice(index,1);  
+  drawMarkersInfo(markers);
 }
