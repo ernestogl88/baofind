@@ -22,6 +22,7 @@ $color-brown: #261809;
   background-blend-mode: difference;
   height: 87vh;
   width: 100vw;
+  margin: 0 auto;
   margin-top: 5%;
   padding-top: 5%;
   text-align: center;
@@ -364,7 +365,6 @@ nav {
   align-items: center;
   display: flex;
   flex-direction: column;
-  flex-basis: 33%;
 }
 .imageInfo img {
   width: 100%;
@@ -373,14 +373,15 @@ nav {
 
 @media (min-width: 700px) { 
   body {
-    background-image: url("/images/mapTreasure2.jpg");
+   
+    background-image: url("/images/mapTreasure3.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-blend-mode: screen;
   }
   .container {
-    height: 100vh;
-    width: 100vw;
+    height: 50vh;
+    width: 40vw;
     padding-top: 0%;
     margin-top: 0%;
     background-image: none;
@@ -389,9 +390,10 @@ nav {
     display: flex;
     flex-direction: column
   }
-  .mapImg{
-   // height: 100vh;
- //   width: 50%;
+  #map{
+    margin-top: 10%;
+   height: 50;
+    width: 100%;
     border: 5px solid white;
   }
   .buttonLogin {
