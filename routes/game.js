@@ -10,10 +10,15 @@ const Spot = require("../models/Spots");
 const multer = require("multer");
 const Map = require("../models/Map");
 const User = require("../models/User.js");
+const moment = require("moment");
 
-router.get("/newGame", ensureLogin.ensureLoggedIn('/auth/facebook'), (req, res) => {
-  res.render("game/newGame", {user: req.user});
-});
+router.get(
+  "/newGame",
+  ensureLogin.ensureLoggedIn("/auth/facebook"),
+  (req, res) => {
+    res.render("game/newGame", { user: req.user });
+  }
+);
 
 router.post("/newGame", (req, res) => {
   if (
@@ -21,7 +26,10 @@ router.post("/newGame", (req, res) => {
     req.body.startDate === "" ||
     req.body.endDate === ""
   ) {
-    res.render("game/newGame", { message: "Error filling the form", user: req.user});
+    res.render("game/newGame", {
+      message: "Error filling the form",
+      user: req.user
+    });
   }
   let spotsId = [];
   let spots = [];
@@ -61,20 +69,42 @@ router.post("/newGame", (req, res) => {
         game.map = map._id;
         return game
           .save()
-          .then(res.render("index", {user: req.user}))
+          .then(res.render("index", { user: req.user }))
           .catch(err => console.log(err));
       });
     })
     .catch(err => console.log(err));
 });
 
-router.get("/joinGame", ensureLogin.ensureLoggedIn('/auth/facebook'),(req, res) => {
-  Game.find({status: true})
-    .populate("map")
-    .then(games => {
-      res.render("game/joinGame", { games, user: req.user });
+router.get(
+  "/joinGame",
+  ensureLogin.ensureLoggedIn("/auth/facebook"),
+  (req, res) => {
+    Game.find({ status: false, gameFinished: false }).then(games => {
+      games.forEach(game => {
+        let now = moment();
+        let currentDate = now.format("YY/MM/DD");
+        let startDate = moment(game.startDate).format("YY/MM/DD");
+        let finishDate = moment(game.finishDate).format("YY/MM/DD");
+        if (currentDate >= startDate && currentDate <= finishDate) {
+          Game.findByIdAndUpdate(game._id, { status: true }).then(game => {
+            Game.find({ status: true })
+              .populate("map")
+              .then(games =>
+                res.render("game/joinGame", { games, user: req.user })
+              );
+          });
+        } else {
+          Game.find({ status: true })
+            .populate("map")
+            .then(games =>
+              res.render("game/joinGame", { games, user: req.user })
+            );
+        }
+      });
     });
-});
+  }
+);
 
 router.get("/joinGame/:id", (req, res) => {
   Game.findByIdAndUpdate(
@@ -111,11 +141,15 @@ router.get("/nearPlaces/:lat/:long", (req, res) => {
     });
 });
 
-router.get("/clue/:id",ensureLogin.ensureLoggedIn('/auth/facebook'), (req, res) => {
-  Spot.findById(req.params.id).then(spot => {
-    res.render("game/clue", { spot , user: req.user});
-  });
-});
+router.get(
+  "/clue/:id",
+  ensureLogin.ensureLoggedIn("/auth/facebook"),
+  (req, res) => {
+    Spot.findById(req.params.id).then(spot => {
+      res.render("game/clue", { spot, user: req.user });
+    });
+  }
+);
 
 router.post("/clue/uploadPhoto", uploadCloud.single("photo"), (req, res) => {
   const imgPath = req.file.url;
@@ -132,13 +166,15 @@ router.post("/clue/uploadPhoto", uploadCloud.single("photo"), (req, res) => {
         .then(game => {
           let spotNumber = game.map.spots.indexOf(user.currentSpot);
           if (spotNumber === game.map.spots.length - 1) {
-            Game.findByIdAndUpdate(user.currentGame, { status: false }).then(
-              game => {
-                User.findByIdAndUpdate(user._id, {
-                  $push: { rewardsWin: game.reward }
-                }).then(res.render("game/winner", {game:game, user: req.user}));
-              }
-            );
+            Game.findByIdAndUpdate(user.currentGame, {
+              gameFinished: true
+            }).then(game => {
+              User.findByIdAndUpdate(user._id, {
+                $push: { rewardsWin: game.reward }
+              }).then(
+                res.render("game/winner", { game: game, user: req.user })
+              );
+            });
           } else {
             User.findByIdAndUpdate(
               req.user._id,
