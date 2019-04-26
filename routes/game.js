@@ -87,7 +87,7 @@ router.get(
         let startDate = moment(game.startDate).format("YY/MM/DD");
         let finishDate = moment(game.finishDate).format("YY/MM/DD");
         if (currentDate >= startDate && currentDate <= finishDate) {
-          Game.findByIdAndUpdate(game._id, { status: true }).then(game => {
+          Game.findByIdAndUpdate(game._id, { status: true }, {new:true}).then(game => {
             Game.find({ status: true })
               .populate("map")
               .then(games =>
