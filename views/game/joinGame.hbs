@@ -3,6 +3,16 @@
     <div class="col-sm gamesCard">
 
       <div class="card-body">
+        {{#if message}}
+        <h2>{{message}}</h2>
+        <div class="col">
+          <a name="" id="" class="btn buttonChoiceGame" href="/game/newGame" role="button">
+            <h4>Create Game</h4>
+            <p>Create your own game and invite your friends to start a challenge</p>
+          </a>
+
+        </div>
+        {{/if}}
         {{#each games}}
         <div class="cardGames">
           <h2 class="card-title">{{name}}</h2>

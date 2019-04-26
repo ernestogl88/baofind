@@ -81,27 +81,42 @@ router.get(
   ensureLogin.ensureLoggedIn("/auth/facebook"),
   (req, res) => {
     Game.find({ status: false, gameFinished: false }).then(games => {
-      games.forEach(game => {
-        let now = moment();
-        let currentDate = now.format("YY/MM/DD");
-        let startDate = moment(game.startDate).format("YY/MM/DD");
-        let finishDate = moment(game.finishDate).format("YY/MM/DD");
-        if (currentDate >= startDate && currentDate <= finishDate) {
-          Game.findByIdAndUpdate(game._id, { status: true }, {new:true}).then(game => {
+      if (games.length===0){
+        res.render("game/joinGame", { message: `We can't find any game. Create your own`, user: req.user })
+      }
+      if (games.length > 0) {
+        games.forEach(game => {
+          let now = moment();
+          let currentDate = now.format("YY/MM/DD");
+          let startDate = moment(game.startDate).format("YY/MM/DD");
+          let finishDate = moment(game.finishDate).format("YY/MM/DD");
+          if (currentDate >= startDate && currentDate <= finishDate) {
+            Game.findByIdAndUpdate(
+              game._id,
+              { status: true },
+              { new: true }
+            ).then(game => {
+              Game.find({ status: true })
+                .populate("map")
+                .then(games =>
+                  res.render("game/joinGame", { games, user: req.user })
+                );
+            });
+          } else {
             Game.find({ status: true })
               .populate("map")
               .then(games =>
                 res.render("game/joinGame", { games, user: req.user })
               );
-          });
-        } else {
-          Game.find({ status: true })
-            .populate("map")
-            .then(games =>
-              res.render("game/joinGame", { games, user: req.user })
-            );
-        }
-      });
+          }
+        });
+      } else {
+        Game.find({ status: true })
+          .populate("map")
+          .then(games =>
+            res.render("game/joinGame", { games, user: req.user })
+          );
+      }
     });
   }
 );
